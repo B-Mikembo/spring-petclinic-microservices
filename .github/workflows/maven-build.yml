@@ -9,6 +9,7 @@ on:
   pull_request:
     branches: [ master ]
 
+
 jobs:
   build:
 
@@ -27,3 +28,11 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B verify
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - name: Deploy Docker image
+      uses: docker/deploy-action@v2
+      with:
+        server-url: https://ip172-18-0-91-cfe45a63tccg00ckqen0.direct.labs.play-with-docker.com:2375
