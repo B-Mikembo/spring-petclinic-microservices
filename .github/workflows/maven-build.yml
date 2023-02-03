@@ -26,9 +26,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: |
-        mvn compile
-        mvn test
-        mvn package
-        mvn verify
-      env:
-        CI: true
+        mvn -B compile
+        mvn -B test
+        mvn -B package
+        mvn -B verify
