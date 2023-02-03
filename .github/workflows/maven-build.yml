@@ -15,5 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: mvn compile
+    - name: Compile with Maven
+      run: mvn compile
     container: openjdk:8-alpine
