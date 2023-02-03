@@ -2,19 +2,26 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+    branches: 
+      - master
 
 jobs:
-
-  build-image:
-    name: Build Container Image
+  build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: docker
     steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: 17
+        
+    - name: Build and test with Maven
+      run: mvn clean install
+      
+    - name: Package with Maven
+      run: mvn package
+      
+    - name: Check code quality with Maven
+      run: mvn verify
