@@ -29,8 +29,6 @@ jobs:
           mvn test
           mvn package
           mvn verify
-        env:
-          CI: true
       - uses: actions/upload-artifact@master
         with:
           name: artifacts
