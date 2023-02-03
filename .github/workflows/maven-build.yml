@@ -28,3 +28,5 @@ jobs:
       run: |
         mvn compile
         mvn test
+        mvn package
+        mvn verify
